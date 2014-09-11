@@ -19,6 +19,21 @@ namespace GatewayLibrary
         private bool isAdd ;
         public string refNo { get; set; }
 
+        public GatewayControl()
+        {
+            InitializeComponent();
+            this.refNo = refNo;
+            this.lvCardsID.View = System.Windows.Forms.View.Details;
+            ColumnHeader columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "Tickets";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 146;
+            this.lvCardsID.Columns.Add(columnHeader1);
+            lbRef.Text = "unkown";
+            isAdd = true;
+            connectParafaitServer();
+        }
+
         public GatewayControl(string refNo)
         {
             InitializeComponent();
@@ -68,6 +83,23 @@ namespace GatewayLibrary
             }
         }
 
+        private void connectParafaitServer()
+        {
+            lbServerStatus.Text = "re-con";
+            parafaitPaymentGateway = new Gateway();
+            if (!parafaitPaymentGateway.InitializeDllMode())
+            {
+                lbServerStatus.Text = "disconnect";
+                throw new Exception("Error initializing Parafait External Gateway: " + parafaitPaymentGateway.LastMessageDetails());
+                //MessageBox.Show("Error initializing Parafait External Gateway", "Init Gateway");
+                //MessageBox.Show(parafaitPaymentGateway.LastMessageDetails(), "Init Gateway");        
+            }
+            else
+            {
+                lbServerStatus.Text = "connecting";
+            }
+        }
+
         private void btSave_Click(object sender, EventArgs e)
         {
             List<string> listID = lvCardsID.Items.Cast<ListViewItem>()
@@ -109,13 +141,27 @@ namespace GatewayLibrary
             }
         }
 
-        private void GatewayControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            lbServerStatus.Text = "re-con";
+            parafaitPaymentGateway = new Gateway();
             if (!parafaitPaymentGateway.InitializeDllMode())
             {
-                MessageBox.Show("Error initializing Parafait External Gateway", "Init Gateway");
-                MessageBox.Show(parafaitPaymentGateway.LastMessageDetails(), "Init Gateway");
+                lbServerStatus.Text = "disconnect";
+                throw new Exception("Error initializing Parafait External Gateway: " + parafaitPaymentGateway.LastMessageDetails());
+                //MessageBox.Show("Error initializing Parafait External Gateway", "Init Gateway");
+                //MessageBox.Show(parafaitPaymentGateway.LastMessageDetails(), "Init Gateway");        
             }
+            else
+            {
+                lbServerStatus.Text = "connecting";
+            }
+            base.OnLoad(e);
+        }
+
+        private void GatewayControl_Load(object sender, EventArgs e)
+        {
+            //connectParafaitServer();
         }
 
         private void btDelete_Click(object sender, EventArgs e)

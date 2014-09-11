@@ -39,6 +39,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lvCardsID = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbServerStatus = new System.Windows.Forms.Label();
             this.noHeaderTabControl1 = new GatewayLibrary.NoHeaderTabControl();
             this.tabPageAdd = new System.Windows.Forms.TabPage();
             this.btDelete = new System.Windows.Forms.Button();
@@ -71,8 +73,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.98828F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.01173F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.0804F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.9196F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -85,13 +87,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(484, 177);
+            this.panel1.Size = new System.Drawing.Size(484, 89);
             this.panel1.TabIndex = 0;
             // 
             // tbCurrentCardID
             // 
             this.tbCurrentCardID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCurrentCardID.Location = new System.Drawing.Point(248, 30);
+            this.tbCurrentCardID.Location = new System.Drawing.Point(264, 11);
             this.tbCurrentCardID.Name = "tbCurrentCardID";
             this.tbCurrentCardID.Size = new System.Drawing.Size(186, 27);
             this.tbCurrentCardID.TabIndex = 5;
@@ -103,7 +105,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(171, 30);
+            this.label2.Location = new System.Drawing.Point(171, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 22);
             this.label2.TabIndex = 4;
@@ -113,7 +115,7 @@
             // 
             this.lbRef.AutoSize = true;
             this.lbRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRef.Location = new System.Drawing.Point(23, 50);
+            this.lbRef.Location = new System.Drawing.Point(23, 41);
             this.lbRef.Name = "lbRef";
             this.lbRef.Size = new System.Drawing.Size(90, 22);
             this.lbRef.TabIndex = 3;
@@ -123,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 14);
+            this.label1.Location = new System.Drawing.Point(23, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 22);
             this.label1.TabIndex = 2;
@@ -131,19 +133,21 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lbServerStatus);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.lbNumberCard);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(499, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(295, 177);
+            this.panel2.Size = new System.Drawing.Size(295, 89);
             this.panel2.TabIndex = 1;
             // 
             // lbNumberCard
             // 
             this.lbNumberCard.AutoSize = true;
             this.lbNumberCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNumberCard.Location = new System.Drawing.Point(130, 30);
+            this.lbNumberCard.Location = new System.Drawing.Point(114, 52);
             this.lbNumberCard.Name = "lbNumberCard";
             this.lbNumberCard.Size = new System.Drawing.Size(20, 22);
             this.lbNumberCard.TabIndex = 7;
@@ -153,7 +157,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(41, 30);
+            this.label4.Location = new System.Drawing.Point(22, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 22);
             this.label4.TabIndex = 6;
@@ -163,10 +167,10 @@
             // 
             this.panel4.Controls.Add(this.lvCardsID);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(496, 189);
+            this.panel4.Location = new System.Drawing.Point(496, 101);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(301, 408);
+            this.panel4.Size = new System.Drawing.Size(301, 496);
             this.panel4.TabIndex = 3;
             // 
             // lvCardsID
@@ -176,20 +180,40 @@
             this.lvCardsID.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvCardsID.Location = new System.Drawing.Point(0, 0);
             this.lvCardsID.Name = "lvCardsID";
-            this.lvCardsID.Size = new System.Drawing.Size(301, 408);
+            this.lvCardsID.Size = new System.Drawing.Size(301, 496);
             this.lvCardsID.TabIndex = 1;
             this.lvCardsID.UseCompatibleStateImageBehavior = false;
             this.lvCardsID.View = System.Windows.Forms.View.Details;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(23, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(98, 17);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Server Status:";
+            // 
+            // lbServerStatus
+            // 
+            this.lbServerStatus.AutoSize = true;
+            this.lbServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbServerStatus.Location = new System.Drawing.Point(127, 12);
+            this.lbServerStatus.Name = "lbServerStatus";
+            this.lbServerStatus.Size = new System.Drawing.Size(76, 17);
+            this.lbServerStatus.TabIndex = 10;
+            this.lbServerStatus.Text = "disconnect";
             // 
             // noHeaderTabControl1
             // 
             this.noHeaderTabControl1.Controls.Add(this.tabPageAdd);
             this.noHeaderTabControl1.Controls.Add(this.tabPageRemove);
             this.noHeaderTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noHeaderTabControl1.Location = new System.Drawing.Point(6, 192);
+            this.noHeaderTabControl1.Location = new System.Drawing.Point(6, 104);
             this.noHeaderTabControl1.Name = "noHeaderTabControl1";
             this.noHeaderTabControl1.SelectedIndex = 0;
-            this.noHeaderTabControl1.Size = new System.Drawing.Size(484, 402);
+            this.noHeaderTabControl1.Size = new System.Drawing.Size(484, 490);
             this.noHeaderTabControl1.TabIndex = 4;
             this.noHeaderTabControl1.SelectedIndexChanged += new System.EventHandler(this.noHeaderTabControl1_SelectedIndexChanged);
             // 
@@ -203,7 +227,7 @@
             this.tabPageAdd.Location = new System.Drawing.Point(4, 22);
             this.tabPageAdd.Name = "tabPageAdd";
             this.tabPageAdd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAdd.Size = new System.Drawing.Size(476, 376);
+            this.tabPageAdd.Size = new System.Drawing.Size(476, 464);
             this.tabPageAdd.TabIndex = 0;
             this.tabPageAdd.Text = "Add";
             // 
@@ -257,7 +281,7 @@
             this.tabPageRemove.Location = new System.Drawing.Point(4, 22);
             this.tabPageRemove.Name = "tabPageRemove";
             this.tabPageRemove.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRemove.Size = new System.Drawing.Size(476, 376);
+            this.tabPageRemove.Size = new System.Drawing.Size(476, 464);
             this.tabPageRemove.TabIndex = 1;
             this.tabPageRemove.Text = "Remove";
             this.tabPageRemove.UseVisualStyleBackColor = true;
@@ -327,6 +351,8 @@
         private System.Windows.Forms.TabPage tabPageRemove;
         private System.Windows.Forms.Button btBack;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbServerStatus;
 
     }
 }
