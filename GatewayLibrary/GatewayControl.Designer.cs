@@ -35,12 +35,12 @@
             this.lbRef = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbServerStatus = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lbNumberCard = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lvCardsID = new System.Windows.Forms.ListView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lbServerStatus = new System.Windows.Forms.Label();
             this.noHeaderTabControl1 = new GatewayLibrary.NoHeaderTabControl();
             this.tabPageAdd = new System.Windows.Forms.TabPage();
             this.btDelete = new System.Windows.Forms.Button();
@@ -143,6 +143,26 @@
             this.panel2.Size = new System.Drawing.Size(295, 89);
             this.panel2.TabIndex = 1;
             // 
+            // lbServerStatus
+            // 
+            this.lbServerStatus.AutoSize = true;
+            this.lbServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbServerStatus.Location = new System.Drawing.Point(127, 12);
+            this.lbServerStatus.Name = "lbServerStatus";
+            this.lbServerStatus.Size = new System.Drawing.Size(76, 17);
+            this.lbServerStatus.TabIndex = 10;
+            this.lbServerStatus.Text = "disconnect";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(23, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(98, 17);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Server Status:";
+            // 
             // lbNumberCard
             // 
             this.lbNumberCard.AutoSize = true;
@@ -185,26 +205,6 @@
             this.lvCardsID.UseCompatibleStateImageBehavior = false;
             this.lvCardsID.View = System.Windows.Forms.View.Details;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(23, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 17);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Server Status:";
-            // 
-            // lbServerStatus
-            // 
-            this.lbServerStatus.AutoSize = true;
-            this.lbServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbServerStatus.Location = new System.Drawing.Point(127, 12);
-            this.lbServerStatus.Name = "lbServerStatus";
-            this.lbServerStatus.Size = new System.Drawing.Size(76, 17);
-            this.lbServerStatus.TabIndex = 10;
-            this.lbServerStatus.Text = "disconnect";
-            // 
             // noHeaderTabControl1
             // 
             this.noHeaderTabControl1.Controls.Add(this.tabPageAdd);
@@ -234,7 +234,7 @@
             // btDelete
             // 
             this.btDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDelete.Location = new System.Drawing.Point(23, 303);
+            this.btDelete.Location = new System.Drawing.Point(23, 341);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(109, 40);
             this.btDelete.TabIndex = 8;

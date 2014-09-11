@@ -8,31 +8,22 @@ using System.Text;
 using System.Windows.Forms;
 using ParafaitPaymentGateway;
 using System.Diagnostics;
+using System.Threading;
 
 
 namespace GatewayLibrary
 {
     public partial class GatewayControl: UserControl
     {
+        private Thread parafaitTheard;
+
         private bool isCtrlVEntered = false;
         private Gateway parafaitPaymentGateway;
         private bool isAdd ;
         public string refNo { get; set; }
 
-        public GatewayControl()
-        {
-            InitializeComponent();
-            this.refNo = refNo;
-            this.lvCardsID.View = System.Windows.Forms.View.Details;
-            ColumnHeader columnHeader1 = new ColumnHeader();
-            columnHeader1.Text = "Tickets";
-            columnHeader1.TextAlign = HorizontalAlignment.Left;
-            columnHeader1.Width = 146;
-            this.lvCardsID.Columns.Add(columnHeader1);
-            lbRef.Text = "unkown";
-            isAdd = true;
-            connectParafaitServer();
-        }
+        public delegate void updateServerStatus(string status, Gateway p);
+        public updateServerStatus delegateUpdateServerStatus;
 
         public GatewayControl(string refNo)
         {
@@ -46,6 +37,49 @@ namespace GatewayLibrary
             this.lvCardsID.Columns.Add(columnHeader1);
             lbRef.Text = refNo;
             isAdd = true;
+            delegateUpdateServerStatus = new updateServerStatus(updateServerStatusMethod);
+
+       }
+
+        public Thread startParafaitThread()
+        {
+            var t = new Thread(() => ParafaitProvider.Connect(this));
+            t.Start();
+            return t;
+        }
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            this.ParentForm.FormClosing += new FormClosingEventHandler(ParentForm_FormClosing);
+        }
+
+        void ParentForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Would you like to close the parent form?", "Close parent form?",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+                parafaitTheard.Abort();
+            }
+        }
+
+        public void updateServerStatusMethod(string status, Gateway p)
+        {
+            lbServerStatus.Text = status;
+            parafaitPaymentGateway = p;
+            if ("Could not connect".Equals(status))
+            {
+                MessageBox.Show("Could not connect to server", "Connection error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void receiveNewCardId(string cardID){
+            if (isAdd)
+                addToCardList(cardID);
+            else
+                removeFromCardList(cardID);
         }
 
         private void addToCardList(string cardID)
@@ -53,6 +87,16 @@ namespace GatewayLibrary
             if (lvCardsID.FindItemWithText(cardID) == null)
             {
                 lvCardsID.Items.Add(cardID);
+                lbNumberCard.Text = lvCardsID.Items.Count.ToString();
+            }
+        }
+
+        private void removeFromCardList(string cardID)
+        {
+            ListViewItem item = lvCardsID.FindItemWithText(cardID);
+            if (item != null)
+            {
+                lvCardsID.Items.Remove(item);
                 lbNumberCard.Text = lvCardsID.Items.Count.ToString();
             }
         }
@@ -83,22 +127,13 @@ namespace GatewayLibrary
             }
         }
 
-        private void connectParafaitServer()
+        private void Control1_HandleDestroyed(Object sender, EventArgs e)
         {
-            lbServerStatus.Text = "re-con";
-            parafaitPaymentGateway = new Gateway();
-            if (!parafaitPaymentGateway.InitializeDllMode())
-            {
-                lbServerStatus.Text = "disconnect";
-                throw new Exception("Error initializing Parafait External Gateway: " + parafaitPaymentGateway.LastMessageDetails());
-                //MessageBox.Show("Error initializing Parafait External Gateway", "Init Gateway");
-                //MessageBox.Show(parafaitPaymentGateway.LastMessageDetails(), "Init Gateway");        
-            }
-            else
-            {
-                lbServerStatus.Text = "connecting";
-            }
+
+            MessageBox.Show("You are in the Control.HandleDestroyed event.");
+
         }
+
 
         private void btSave_Click(object sender, EventArgs e)
         {
@@ -111,11 +146,13 @@ namespace GatewayLibrary
             }
 
             clearAllCardList();
+            tbCurrentCardID.Focus();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             clearAllCardList();
+            tbCurrentCardID.Focus();
         }
 
         private void tbCurrentCardID_KeyDown(object sender, KeyEventArgs e)
@@ -136,42 +173,27 @@ namespace GatewayLibrary
         {
             if (isCtrlVEntered && !String.IsNullOrEmpty(tbCurrentCardID.Text))
             {
-                addToCardList(tbCurrentCardID.Text);
+                receiveNewCardId(tbCurrentCardID.Text);
                 isCtrlVEntered = false;
             }
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            lbServerStatus.Text = "re-con";
-            parafaitPaymentGateway = new Gateway();
-            if (!parafaitPaymentGateway.InitializeDllMode())
-            {
-                lbServerStatus.Text = "disconnect";
-                throw new Exception("Error initializing Parafait External Gateway: " + parafaitPaymentGateway.LastMessageDetails());
-                //MessageBox.Show("Error initializing Parafait External Gateway", "Init Gateway");
-                //MessageBox.Show(parafaitPaymentGateway.LastMessageDetails(), "Init Gateway");        
-            }
-            else
-            {
-                lbServerStatus.Text = "connecting";
-            }
-            base.OnLoad(e);
-        }
 
         private void GatewayControl_Load(object sender, EventArgs e)
         {
-            //connectParafaitServer();
+            parafaitTheard = startParafaitThread();
         }
 
         private void btDelete_Click(object sender, EventArgs e)
         {
             this.noHeaderTabControl1.SelectTab("tabPageRemove");
+            tbCurrentCardID.Focus();
         }
 
         private void btBack_Click(object sender, EventArgs e)
         {
             this.noHeaderTabControl1.SelectTab("tabPageAdd");
+            tbCurrentCardID.Focus();
         }
 
         private void noHeaderTabControl1_SelectedIndexChanged(object sender, EventArgs e)
